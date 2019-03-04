@@ -8,12 +8,17 @@
     >
 <RelativeLayout
     android:layout_width="100dp"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:id="@+id/card_image"
+        android:cropToPadding="true"
+        android:padding="8dp"
         />
     <TextView
         android:layout_width="match_parent"
@@ -23,6 +28,7 @@
         android:text="testing"
         android:textSize="15sp"
         android:gravity="center"
+
         />
 
 </RelativeLayout>

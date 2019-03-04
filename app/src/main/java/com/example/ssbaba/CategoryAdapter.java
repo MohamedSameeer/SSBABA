@@ -11,17 +11,18 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    List<CategoryItem> list;
+    private ArrayList<Item> arrayList;
     private Context context;
     private View.OnClickListener onClickListener;
-        public CategoryAdapter(List<CategoryItem> list , Context context , View.OnClickListener onClickListener)
+        public CategoryAdapter( ArrayList<Item> arrayList , Context context , View.OnClickListener onClickListener)
         {
-            this.list=list;
+            this.arrayList=arrayList;
             this.onClickListener=onClickListener;
             this.context=context;
 
@@ -39,18 +40,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-        Picasso.with(viewHolder.itemView.getContext()).load(list.get(i).getImageUrl()).into(viewHolder.image);
-        viewHolder.text.setText(list.get(i).getText());
-
+       // Picasso.with(viewHolder.itemView.getContext()).load(map.get("Image").toString()).into(viewHolder.image);
+        viewHolder.text.setText(arrayList.get(i).getText());
+        viewHolder.image.setImageResource(arrayList.get(i).getImage());
     }
 
     @Override
     public int getItemCount() {
-            if(list==null){
+            if(arrayList==null){
                 return 0;
             }
 
-        return list.size();
+        return arrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
