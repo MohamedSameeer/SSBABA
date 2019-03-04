@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1098897671938-r7dbkihs7jttlovid0fdnrn98g87solt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ssbaba",
+            "certificate_hash": "1bf6682e9d39e61c472a1bb5fbb36a7fb2e48171"
+          }
+        },
+        {
           "client_id": "1098897671938-ljrsefnoaftgp8s2k4l9jvtpnkd45pi4.apps.googleusercontent.com",
           "client_type": 3
         }
