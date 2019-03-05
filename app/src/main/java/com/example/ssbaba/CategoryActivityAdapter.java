@@ -15,9 +15,12 @@ import java.util.List;
 
 public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivityAdapter.ViewHolder> {
     List<categoryItem> list;
-    public CategoryActivityAdapter(List<categoryItem> list){
+    private OnClickListener onClickListener;
+
+    public CategoryActivityAdapter(List<categoryItem> list, OnClickListener onClickListener){
 
         this.list=list;
+        this.onClickListener=onClickListener;
     }
 
 
@@ -30,10 +33,17 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
 
 
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickListener != null)
+                    onClickListener.onClick(i);
 
+            }
+        });
             viewHolder.name.setText(list.get(i).getName()+"");
             viewHolder.price.setText(list.get(i).getPrice()+"");
             if(list.get(i).getImage().length()<6) {
@@ -69,5 +79,8 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
             price=itemView.findViewById(R.id.price);
 
         }
+    }
+    public interface OnClickListener {
+        void onClick(int i);
     }
 }
