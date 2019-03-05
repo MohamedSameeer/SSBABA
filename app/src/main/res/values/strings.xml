@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SS BABA</string>
+    <string name="title_activity_specific_category">SpecificCategoryActivity</string>
 </resources>
