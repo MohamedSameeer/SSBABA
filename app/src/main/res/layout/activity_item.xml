@@ -7,7 +7,15 @@
     tools:context=".Items.ItemActivity"
     android:id="@+id/parent"
     >
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardParent"
+    android:layout_margin="8dp"
+    android:padding="8dp"
 
+
+    >
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="275dp"
@@ -17,7 +25,11 @@
         android:id="@+id/item_picture"
         android:elevation="8dp"
         android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
         />
+</android.support.v7.widget.CardView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -33,10 +45,16 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/item_picture"
+        android:layout_below="@+id/cardParent"
         android:id="@+id/scroll"
         >
-<RelativeLayout
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:padding="12dp"
+            >
+            <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
    android:layout_below="@+id/item_picture"
@@ -51,6 +69,7 @@
         android:layout_marginLeft="8dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_marginTop="8dp"
         />
 <TextView
     android:layout_width="wrap_content"
@@ -138,5 +157,7 @@
         />
 
 </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
     </ScrollView>
 </RelativeLayout>
