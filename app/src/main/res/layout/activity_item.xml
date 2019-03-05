@@ -10,28 +10,37 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="275dp"
         android:src="@drawable/a"
         android:layout_alignParentTop="true"
         android:cropToPadding="true"
         android:id="@+id/item_picture"
         android:elevation="8dp"
+        android:layout_marginBottom="8dp"
         />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="22dp"
-        android:layout_marginLeft="12dp"
+        android:layout_gravity="end|bottom"
+        android:layout_alignParentEnd="true"
         android:src="@drawable/ic_add_shopping_cart_black_24dp"
-        android:id="@+id/fab"
-        />
+        android:tint="#fefefe"
+        android:layout_alignBottom="@+id/scroll"
+        android:layout_margin="16dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_picture"
+        android:id="@+id/scroll"
+        >
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
    android:layout_below="@+id/item_picture"
+
     >
     <TextView
         android:layout_width="wrap_content"
@@ -103,6 +112,7 @@
         android:text="this is the new iphone , it looks nice and great , i dont recommend you to buy it because it runs in ios and me as an android developer hates this shit as fuck , so i'd like to tell you my opinion dear customer , press the back button and get out of here , look for an android device and buy it instead , and you will thank me later :) "
         android:layout_margin="8dp"
         android:id="@+id/description"
+        android:padding="8dp"
 
         />
     <Button
@@ -117,4 +127,5 @@
         />
 
 </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
