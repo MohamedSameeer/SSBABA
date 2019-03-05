@@ -3,6 +3,7 @@ package com.example.ssbaba;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -33,12 +34,19 @@ public class MainActivity extends AppCompatActivity {
     CategoryAdapter adapter;
     ArrayList<Item> arrayList;
 
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+
+        viewPager.setAdapter(viewPagerAdapter);
+
         arrayList = new ArrayList<>();
         arrayList.add(new Item(R.drawable.a,"phones"));
         arrayList.add(new Item(R.drawable.b,"tablets"));

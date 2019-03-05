@@ -36,9 +36,10 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     private void Preview() {
-
+if (image.isEmpty()){}
+    else{
         Picasso.with(getApplicationContext())
-                .load(image).placeholder(R.drawable.ic_launcher_foreground).into(itemPicture);
+                .load(image).placeholder(R.drawable.ic_launcher_foreground).into(itemPicture);}
         itemName.setText(name);
         itemPrice.setText(price);
         itemColor.setText(color);
