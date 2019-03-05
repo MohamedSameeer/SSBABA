@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Login.ActivityLogin">
         </activity>
-        <activity android:name=".Regestration.ActivityRegestration">
+        <activity android:name=".Regestration.ActivityRegestration"></activity>
         <activity android:name=".SpecificCategoryActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

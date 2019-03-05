@@ -3,6 +3,7 @@ package com.example.ssbaba;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -33,7 +34,6 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child("Categories");
         recyclerView = findViewById(R.id.category_recycler_view);
         arrayList = new ArrayList<>();
-        adapter = new CategoryActivityAdapter(arrayList);
 
         databaseReference.child("Phones").child("List").addValueEventListener(new ValueEventListener() {
             @Override
@@ -50,7 +50,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     categoryItem.setPrice(snapshot.child("price").getValue().toString());
                     categoryItem.setYear(snapshot.child("year").getValue().toString());
                     arrayList.add(categoryItem);
-
+                    Log.e("",categoryItem.getColor());
 
                     adapter.notifyDataSetChanged();
 
@@ -66,6 +66,8 @@ public class SpecificCategoryActivity extends AppCompatActivity {
             }
         });
 
-
+        adapter = new CategoryActivityAdapter(arrayList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 }

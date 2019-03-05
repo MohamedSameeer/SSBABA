@@ -25,15 +25,17 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View row = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_specific_category, viewGroup, false);
+        View row = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.category_row_item, viewGroup, false);
         return new ViewHolder(row);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-            viewHolder.textView.setText(list.get(i).getName());
-            viewHolder.textView1.setText(list.get(i).getPrice());
+
+
+            viewHolder.name.setText(list.get(i).getName()+"");
+            viewHolder.price.setText(list.get(i).getPrice()+"");
             Picasso.with(viewHolder.imageView.getContext()).load(list.get(i).getImage()).into(viewHolder.imageView);
 
 
@@ -50,13 +52,13 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView textView;
-        TextView textView1;
+        TextView name;
+        TextView price;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.item_pic);
-            textView=itemView.findViewById(R.id.name);
-            textView1=itemView.findViewById(R.id.price);
+            name=itemView.findViewById(R.id.name);
+            price=itemView.findViewById(R.id.price);
 
         }
     }
