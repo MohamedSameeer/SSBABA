@@ -52,7 +52,17 @@
         android:textSize="20sp"
         android:textStyle="bold"
         />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="price: "
+    android:textSize="22sp"
+    android:layout_below="@+id/item_name"
+    android:id="@+id/pp"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="8dp"
 
+    />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,6 +73,7 @@
         android:layout_below="@+id/item_name"
         android:textColor="#00e676"
         android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/pp"
         />
     <TextView
         android:layout_width="wrap_content"
