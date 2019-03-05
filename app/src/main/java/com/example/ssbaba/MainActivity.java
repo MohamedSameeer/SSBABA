@@ -1,5 +1,6 @@
 package com.example.ssbaba;
 
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,8 +25,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference myRef ;
+     ;
     RecyclerView categroiesRecyclerView;
     private static final int PICK_IMG_REQUEST =1 ;
     private static final int SPACING =1 ;
@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
-        firebaseDatabase= FirebaseDatabase.getInstance();
-        myRef = firebaseDatabase.getReference().child("Categories");
         arrayList = new ArrayList<>();
         arrayList.add(new Item(R.drawable.a,"phones"));
         arrayList.add(new Item(R.drawable.b,"tablets"));
@@ -49,11 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
         categroiesRecyclerView = findViewById(R.id.categories);
 
-        adapter = new CategoryAdapter(arrayList, this, new View.OnClickListener() {
-
+        adapter = new CategoryAdapter(arrayList, this, new CategoryAdapter.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //to click on View and open a new Activity previewing its content
+            public void onClick(int i) {
+           startActivity(new Intent(MainActivity.this,SpecificCategoryActivity.class));
             }
         });
 

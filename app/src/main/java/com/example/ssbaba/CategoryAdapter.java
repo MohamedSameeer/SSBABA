@@ -19,8 +19,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private ArrayList<Item> arrayList;
     private Context context;
-    private View.OnClickListener onClickListener;
-        public CategoryAdapter( ArrayList<Item> arrayList , Context context , View.OnClickListener onClickListener)
+    private OnClickListener onClickListener;
+        public CategoryAdapter( ArrayList<Item> arrayList , Context context , OnClickListener onClickListener)
         {
             this.arrayList=arrayList;
             this.onClickListener=onClickListener;
@@ -38,12 +38,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
        // Picasso.with(viewHolder.itemView.getContext()).load(map.get("Image").toString()).into(viewHolder.image);
         viewHolder.text.setText(arrayList.get(i).getText());
         viewHolder.image.setImageResource(arrayList.get(i).getImage());
-    }
+       viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if (onClickListener != null)
+                   onClickListener.onClick(i);
+
+           }
+       });
+        }
 
     @Override
     public int getItemCount() {
@@ -66,6 +74,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         }
     }
     public interface OnClickListener {
-        void onClick(int index);
+        void onClick(int i);
     }
 }
