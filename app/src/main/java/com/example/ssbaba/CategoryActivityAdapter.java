@@ -36,8 +36,16 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
 
             viewHolder.name.setText(list.get(i).getName()+"");
             viewHolder.price.setText(list.get(i).getPrice()+"");
-            Picasso.with(viewHolder.imageView.getContext()).load(list.get(i).getImage()).into(viewHolder.imageView);
+            if(list.get(i).getImage().length()<6) {
+                viewHolder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
 
+            }
+            else{
+
+                Picasso.with(viewHolder.imageView.getContext())
+                        .load(list.get(i).getImage()).placeholder(R.drawable.ic_launcher_foreground).into(viewHolder.imageView);
+
+            }
 
 
     }

@@ -50,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CategoryAdapter(arrayList, this, new CategoryAdapter.OnClickListener() {
             @Override
             public void onClick(int i) {
-           startActivity(new Intent(MainActivity.this,SpecificCategoryActivity.class));
+                Intent intent = new Intent(MainActivity.this,SpecificCategoryActivity.class);
+                intent.putExtra("i",i);
+                Log.e("Main",i+"");
+
+                startActivity(intent);
             }
         });
 
