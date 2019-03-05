@@ -3,6 +3,8 @@ package com.example.ssbaba;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -33,7 +35,6 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child("Categories");
         recyclerView = findViewById(R.id.category_recycler_view);
         arrayList = new ArrayList<>();
-        adapter = new CategoryActivityAdapter(arrayList);
 
         databaseReference.child("Phones").child("List").addValueEventListener(new ValueEventListener() {
             @Override
@@ -41,7 +42,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    categoryItem categoryItem = new categoryItem();
+                   categoryItem categoryItem = new categoryItem();
                     categoryItem.setColor(snapshot.child("color").getValue().toString());
                     categoryItem.setDescription(snapshot.child("description").getValue().toString());
                     categoryItem.setImage(snapshot.child("image").getValue().toString());
@@ -52,20 +53,21 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     arrayList.add(categoryItem);
 
 
+                 Log.e("Specific Category","in");
+                /* categoryItem categoryItem=snapshot.getValue(com.example.ssbaba.categoryItem.class);
+                 arrayList.add(categoryItem);*/
                     adapter.notifyDataSetChanged();
-
-
                 }
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                Log.e("Specific Category","Error OnCancelled");
             }
         });
 
-
+        adapter = new CategoryActivityAdapter(arrayList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 }

@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
         arrayList = new ArrayList<>();
-        arrayList.add(new Item(R.drawable.a,"phones"));
-        arrayList.add(new Item(R.drawable.b,"tablets"));
-        arrayList.add(new Item(R.drawable.c,"Smart Watches"));
-        arrayList.add(new Item(R.drawable.d,"Accessories"));
+        arrayList.add(new Item(R.drawable.ecommerce2,"phones"));
+        arrayList.add(new Item(R.drawable.ecommerce2,"tablets"));
+        arrayList.add(new Item(R.drawable.ecommerce2,"Smart Watches"));
+        arrayList.add(new Item(R.drawable.ecommerce2,"Accessories"));
 
         categroiesRecyclerView = findViewById(R.id.categories);
 

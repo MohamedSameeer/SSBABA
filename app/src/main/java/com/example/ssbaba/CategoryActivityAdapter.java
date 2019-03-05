@@ -2,6 +2,7 @@ package com.example.ssbaba;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,19 +26,19 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View row = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_specific_category, viewGroup, false);
+        View row = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_item, viewGroup, false);
         return new ViewHolder(row);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-            viewHolder.textView.setText(list.get(i).getName());
-            viewHolder.textView1.setText(list.get(i).getPrice());
-            Picasso.with(viewHolder.imageView.getContext()).load(list.get(i).getImage()).into(viewHolder.imageView);
+        Log.e("adapter Name",list.get(i).getName()+"");
+        Log.e("adapter Price",list.get(i).getPrice()+"");
 
-
-
+        viewHolder.textView.setText(list.get(i).getName()+"");
+        viewHolder.textView1.setText(list.get(i).getPrice()+"");
+        Picasso.with(viewHolder.imageView.getContext()).load(list.get(i).getImage()).into(viewHolder.imageView);
     }
 
     @Override
