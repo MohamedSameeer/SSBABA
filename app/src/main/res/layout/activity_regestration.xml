@@ -5,7 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/regestration_layout"
+    android:background="@color/colorPrimary"
+
     tools:context=".Regestration.ActivityRegestration">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="SSBaba"
+        android:textColor="#ffffff"
+        android:textSize="80sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18" />
 
     <EditText
         android:id="@+id/user_name"
@@ -79,12 +97,17 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:text="Sign Up"
-        android:textSize="16dp"
+        android:textSize="20dp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="#fefefe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/visa"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/button"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="#b71c1c"
+        android:elevation="8dp"
+
         />
 </android.support.constraint.ConstraintLayout>
