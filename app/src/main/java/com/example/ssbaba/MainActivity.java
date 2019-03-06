@@ -4,16 +4,21 @@ import android.content.Intent;
 import android.media.Image;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+import com.example.ssbaba.MainFragments.HomeFragment;
+import com.example.ssbaba.MainFragments.ProfileFragment;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,66 +33,46 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-
-     ;
-    RecyclerView categroiesRecyclerView;
-    private static final int PICK_IMG_REQUEST =1 ;
-    private static final int SPACING =1 ;
-    private static int SPAN_COUNT=4;
-    CategoryAdapter adapter;
-    ArrayList<Item> arrayList;
-
-    ViewPager viewPager;
+    BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseApp.initializeApp(this);
 
-        ViewFlipper viewFlipper=findViewById(R.id.view_flipper);
-
-        int img[]={R.drawable.slide3,R.drawable.slide2,R.drawable.slide1};
-
-        for(int image:img){
-
-            ImageView imageView=new ImageView(this);
-            imageView.setBackgroundResource(image);
-
-            viewFlipper.addView(imageView);
-            viewFlipper.setFlipInterval(3000);
-            viewFlipper.setAutoStart(true);
-
-            viewFlipper.setInAnimation(this,android.R.anim.slide_in_left);
-            viewFlipper.setOutAnimation(this,android.R.anim.slide_out_right);
-
+        bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
         }
+    }
 
-        arrayList = new ArrayList<>();
-        arrayList.add(new Item(R.drawable.ecommerce2,"phones"));
-        arrayList.add(new Item(R.drawable.ecommerce2,"tablets"));
-        arrayList.add(new Item(R.drawable.ecommerce2,"Smart Watches"));
-        arrayList.add(new Item(R.drawable.ecommerce2,"Accessories"));
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
 
-        categroiesRecyclerView = findViewById(R.id.categories);
+                    switch (item.getItemId()) {
+                        case R.id.nav_home:
+                            selectedFragment = new HomeFragment();
+                            break;
+                        case R.id.nav_profile:
+                            selectedFragment = new ProfileFragment();
+                            break;
 
-        adapter = new CategoryAdapter(arrayList, this, new CategoryAdapter.OnClickListener() {
-            @Override
-            public void onClick(int i) {
-                Intent intent = new Intent(MainActivity.this,SpecificCategoryActivity.class);
-                intent.putExtra("i",i);
-                Log.e("Main",i+"");
+                    }
 
-                startActivity(intent);
-            }
-        });
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, SPAN_COUNT);
-        categroiesRecyclerView.setLayoutManager(gridLayoutManager);
-        categroiesRecyclerView.addItemDecoration(new GridItemDecoration(SPAN_COUNT,SPACING,true));
-        categroiesRecyclerView.setAdapter(adapter);
+                    return true;
+                }
+            };
+
 
     }
 
 
-}
+
