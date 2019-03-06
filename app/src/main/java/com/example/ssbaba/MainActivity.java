@@ -1,6 +1,7 @@
 package com.example.ssbaba;
 
 import android.content.Intent;
+import android.media.Image;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
@@ -10,6 +11,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ViewFlipper;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -41,11 +44,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+        ViewFlipper viewFlipper=findViewById(R.id.view_flipper);
 
-        viewPager.setAdapter(viewPagerAdapter);
+        int img[]={R.drawable.slide3,R.drawable.slide2,R.drawable.slide1};
+
+        for(int image:img){
+
+            ImageView imageView=new ImageView(this);
+            imageView.setBackgroundResource(image);
+
+            viewFlipper.addView(imageView);
+            viewFlipper.setFlipInterval(3000);
+            viewFlipper.setAutoStart(true);
+
+            viewFlipper.setInAnimation(this,android.R.anim.slide_in_left);
+            viewFlipper.setOutAnimation(this,android.R.anim.slide_out_right);
+
+        }
 
         arrayList = new ArrayList<>();
         arrayList.add(new Item(R.drawable.ecommerce2,"phones"));
