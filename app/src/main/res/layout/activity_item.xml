@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Items.ItemActivity"
+    android:id="@+id/parent"
+    >
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardParent"
+    android:layout_margin="8dp"
+    android:padding="8dp"
+
+
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="275dp"
+        android:src="@drawable/a"
+        android:layout_alignParentTop="true"
+        android:cropToPadding="true"
+        android:id="@+id/item_picture"
+        android:elevation="8dp"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        />
+</android.support.v7.widget.CardView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_add_shopping_cart_black_24dp"
+        android:tint="#fefefe"
+        android:layout_alignBottom="@+id/scroll"
+        android:layout_margin="16dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardParent"
+        android:id="@+id/scroll"
+        >
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:padding="12dp"
+            >
+            <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   android:layout_below="@+id/item_picture"
+
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_name"
+        android:textColor="#000000"
+        android:text="iphone 8+"
+        android:layout_marginLeft="8dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="price: "
+    android:textSize="22sp"
+    android:layout_below="@+id/item_name"
+    android:id="@+id/pp"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="8dp"
+
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_price"
+        android:text="1000$"
+        android:layout_marginLeft="8dp"
+        android:textSize="22sp"
+        android:layout_below="@+id/item_name"
+        android:textColor="#00e676"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/pp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="color:"
+        android:layout_below="@+id/add_to_wish_list_2"
+        android:layout_marginLeft="8dp"
+        android:textSize="18sp"
+        android:id="@+id/c"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/c"
+        android:text="real color"
+        android:id="@+id/item_color"
+        android:layout_below="@id/add_to_wish_list_2"
+        android:layout_marginLeft="8dp"
+        android:textSize="18sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/y"
+        android:layout_below="@id/c"
+        android:text="year:"
+        android:layout_marginLeft="8dp"
+        android:textSize="18sp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/year"
+        android:layout_below="@id/c"
+        android:text="Real year"
+        android:layout_marginLeft="8dp"
+        android:textSize="18sp"
+        android:layout_toRightOf="@+id/y"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/year"
+        android:textSize="18sp"
+        android:text="this is the new iphone , it looks nice and great , i dont recommend you to buy it because it runs in ios and me as an android developer hates this shit as fuck , so i'd like to tell you my opinion dear customer , press the back button and get out of here , look for an android device and buy it instead , and you will thank me later :) "
+        android:layout_margin="8dp"
+        android:id="@+id/description"
+        android:padding="8dp"
+
+        />
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/ic_loyalty_black_24dp"
+        android:layout_toRightOf="@+id/item_price"
+        android:layout_below="@id/item_name"
+        android:id="@+id/add_to_wish_list_2"
+
+        />
+
+</RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </ScrollView>
+</RelativeLayout>

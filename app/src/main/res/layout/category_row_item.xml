@@ -43,6 +43,27 @@
                 android:id="@+id/price"
                 android:textColor="#4CAF50"
 
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_to_cart_button"
+                android:layout_below="@id/price"
+                android:backgroundTint="#00e676"
+                android:text="Add to Cart"
+                android:paddingLeft="35dp"
+                android:paddingRight="35dp"
+                android:layout_marginRight="8dp"
+                />
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_to_wish_list"
+                android:layout_toRightOf="@id/add_to_cart_button"
+                android:layout_below="@id/price"
+                android:background="@drawable/ic_loyalty_black_24dp"
                 />
 
 
