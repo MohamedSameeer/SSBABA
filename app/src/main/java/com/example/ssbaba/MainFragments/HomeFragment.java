@@ -58,10 +58,10 @@ public class HomeFragment extends Fragment {
         }
 
         arrayList = new ArrayList<>();
-        arrayList.add(new Item(R.drawable.a,"phones"));
-        arrayList.add(new Item(R.drawable.b,"tablets"));
-        arrayList.add(new Item(R.drawable.c,"Smart Watches"));
-        arrayList.add(new Item(R.drawable.d,"Accessories"));
+        arrayList.add(new Item(R.drawable.phone,"phones"));
+        arrayList.add(new Item(R.drawable.ipad,"tablets"));
+        arrayList.add(new Item(R.drawable.watch,"Smart Watches"));
+        arrayList.add(new Item(R.drawable.acessories,"Accessories"));
 
         categroiesRecyclerView = view.findViewById(R.id.categories);
         final Intent intent = new Intent(getActivity(), SpecificCategoryActivity.class);
