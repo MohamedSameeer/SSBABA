@@ -12,15 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Items.ItemActivity"></activity>
-        <activity android:name=".Login.ActivityLogin"></activity>
-        <activity android:name=".Regestration.ActivityRegestration" />
-        <activity android:name=".SpecificCategoryActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Login.ActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Regestration.ActivityRegestration" />
+        <activity android:name=".SpecificCategoryActivity" />
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 
