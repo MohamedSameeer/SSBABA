@@ -15,11 +15,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.example.ssbaba.Login.ActivityLogin;
 import com.example.ssbaba.MainFragments.HomeFragment;
 import com.example.ssbaba.MainFragments.ProfileFragment;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,18 +37,57 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseUser user;
     BottomNavigationView bottomNav;
-
+    FirebaseAuth mAuth;
+    DatabaseReference userRef;
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        user=FirebaseAuth.getInstance().getCurrentUser();
 
         bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new HomeFragment()).commit();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(user==null){
+            Intent i=new Intent(MainActivity.this, ActivityLogin.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+            finish();
+        }else{
+            mAuth=FirebaseAuth.getInstance();
+            userId=mAuth.getCurrentUser().getUid();
+            userRef=FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.child("name").exists()){
+                            Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                        }else
+                        {
+                            Intent intent=new Intent(MainActivity.this,ProfileFragment.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 

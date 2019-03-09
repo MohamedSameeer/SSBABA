@@ -96,5 +96,17 @@
         android:textStyle="bold"
         android:textColor="#fefefe"
         />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Don't have Account?"
+            android:textAllCaps="false"
+            android:id="@+id/dont_have_acc"
+            app:layout_constraintTop_toBottomOf="@id/sign_in_with_google"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:textAlignment="textEnd"
+            />
 </android.support.constraint.ConstraintLayout>

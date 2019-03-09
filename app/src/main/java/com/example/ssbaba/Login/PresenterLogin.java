@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.example.ssbaba.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -25,33 +26,46 @@ import static android.support.constraint.Constraints.TAG;
 
 public class PresenterLogin {
 
-    String email,password;
+    String sEmail,sPassword;
     Context context;
     FirebaseAuth mAuth;
-
+    boolean x;
+    IViewLogin iViewLogin;
+    ActivityLogin activityLogin;
     public PresenterLogin(Context context){
         this.context=context;
         mAuth=FirebaseAuth.getInstance();
+        iViewLogin=new ActivityLogin();
     }
 
-    public PresenterLogin(String email, String password, Context context){
-        this.email=email;
-        this.password=password;
-        this.context=context;
-        mAuth=FirebaseAuth.getInstance();
-        Log.e("Presenter Login","constractor hey");
-        loginWithMyAccount();
-    }
 
-    private void loginWithMyAccount() {
+    public void loginWithAccount(EditText email, EditText password) {
+        sEmail=email.getText().toString().trim();
+        sPassword=password.getText().toString().trim();
+        boolean flag=true;
+        if(sEmail.trim().isEmpty()){
+            email.setError("can't leave this field empty");
+            flag=false;
+        }
+        if(sPassword.trim().isEmpty()){
+            password.setError("can't be this field empty");
+            flag=false;
+        }
+        if(flag==true){
+            Log.e("Activity Login","Done");
+            loginWithMyAccount();
+        }
+    }
+    public void loginWithMyAccount() {
         Log.d("Presenter Login","enter to method");
-                mAuth.signInWithEmailAndPassword(email,password)
+                mAuth.signInWithEmailAndPassword(sEmail,sPassword)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             FirebaseUser user=mAuth.getCurrentUser();
                             Log.e("Presenter Login", "signInWithEmail:success");
+                            iViewLogin.StartMainActivity();
                         }
                         else {
                             // If sign in fails, display a message to the user.
@@ -61,24 +75,25 @@ public class PresenterLogin {
                 });
     }
 
-    public void signInWithGoogleAccount(int requestCode,int RC_SIGN_IN,Intent data){
+    public  void signInWithGoogleAccount(int requestCode,int RC_SIGN_IN,Intent data){
 
         if (requestCode == RC_SIGN_IN && data != null) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.e("PresenterLogin","Successful Login with Google Account");
-                firebaseAuthWithGoogle(account);
+                if (account != null) {
+                    firebaseAuthWithGoogle(account);
+                }
+
             } catch (ApiException e) {
                 Log.e(TAG, "Google sign in failed", e);
 
             }
         }
-
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
+        Log.e(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -86,18 +101,17 @@ public class PresenterLogin {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+                            Log.e(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            iViewLogin.StartMainActivity();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-
+                            Log.e(TAG, "signInWithCredential:failure", task.getException());
                         }
 
                         // ...
                     }
                 });
+        Log.e("firebaseAuthWithGoogle",x+"");
     }
-
-
 }
