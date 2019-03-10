@@ -51,9 +51,13 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
         signWithGoodleAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
                 Intent intent=mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(intent,RC_SIGN_IN);
+
+
             }
         });
         dontHaveAcc.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +83,6 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
         dontHaveAcc=findViewById(R.id.dont_have_acc);
         signWithGoodleAccount=findViewById(R.id.sign_in_with_google);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
     }

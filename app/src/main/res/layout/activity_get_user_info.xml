@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".getUserInfo.getUserInfoActivity"
+    >
+
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="first name"
+        android:id="@+id/first_name"
+        />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_toLeftOf="@+id/first_name"
+        android:layout_toEndOf="@+id/first_name"
+        android:id="@+id/first_name_et"
+        />
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="last name"
+        android:id="@+id/last_name"
+        android:layout_below="@+id/first_name_et"
+        />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_toLeftOf="@+id/first_name"
+        android:layout_toEndOf="@+id/last_name"
+        android:layout_below="@+id/first_name_et"
+        android:id="@+id/last_name_et"
+
+
+        />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="done"
+    android:id="@+id/done"
+    android:layout_below="@+id/last_name"
+
+    ></Button>
+
+</RelativeLayout>

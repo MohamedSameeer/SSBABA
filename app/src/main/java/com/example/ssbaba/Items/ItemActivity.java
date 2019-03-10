@@ -1,14 +1,24 @@
 package com.example.ssbaba.Items;
 
+import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ssbaba.R;
 import com.example.ssbaba.categoryItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class ItemActivity extends AppCompatActivity {
@@ -22,18 +32,31 @@ public class ItemActivity extends AppCompatActivity {
     Button addToCart;
     Button addToWishList;
     String name, price, year, model, image, description, color;
-
+    FirebaseAuth mAuth;
+    String currentUser;
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+    boolean likeState;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-
+        FirebaseApp.initializeApp(this);
+        mAuth=FirebaseAuth.getInstance();
+        currentUser=mAuth.getCurrentUser().getUid();
+        database=FirebaseDatabase.getInstance();
+        databaseReference =database.getReference().child("WishList");
         intializeFields();
         getData();
         Preview();
 
 
+
     }
+
+
+
+
 
     private void Preview() {
         if (image.isEmpty()) {
@@ -70,6 +93,10 @@ public class ItemActivity extends AppCompatActivity {
         itemYear = findViewById(R.id.year);
         addToCart = findViewById(R.id.add_to_cart_button);
         addToWishList = findViewById(R.id.add_to_wish_list_2);
+        likeState=false;
 
     }
+
+
+
 }

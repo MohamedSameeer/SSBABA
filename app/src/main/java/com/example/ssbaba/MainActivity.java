@@ -17,10 +17,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
-
 import com.example.ssbaba.Login.ActivityLogin;
 import com.example.ssbaba.MainFragments.HomeFragment;
 import com.example.ssbaba.MainFragments.ProfileFragment;
+import com.example.ssbaba.getUserInfo.getUserInfoActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -65,21 +65,24 @@ public class MainActivity extends AppCompatActivity {
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
             finish();
-        }else{
+        }
+        else{
             mAuth=FirebaseAuth.getInstance();
             userId=mAuth.getCurrentUser().getUid();
             userRef=FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.child("name").exists()){
+                        if(dataSnapshot.child("first_name").exists()){
                             Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                         }else
                         {
-                            Intent intent=new Intent(MainActivity.this,ProfileFragment.class);
+                            Intent intent=new Intent(MainActivity.this, getUserInfoActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
+
+
                         }
                 }
 

@@ -1,47 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:andoid="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:andoid="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainFragments.ProfileFragment">
+    tools:context=".MainFragments.ProfileFragment"
+
+    >
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:src="#455A64"
-    android:scaleType="centerCrop"
-    android:id="@+id/cover"
-    />
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+
+            android:scaleType="centerCrop" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_picture"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/ic_launcher_background"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
+            android:src="@drawable/ic_launcher_background"
 
             />
+
         <TextView
+            android:id="@+id/user_name_tv"
+            style="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/user_name"
-            android:textSize="24sp"
-            android:text="user name"
-            android:textColor="#FEFEFE"
             android:layout_below="@id/profile_picture"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            style="bold"
+            android:text="user name"
+            android:textColor="#C70909"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/logOut"
+            android:text="LogOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cover"
             />
-
-
 
     </RelativeLayout>
 
