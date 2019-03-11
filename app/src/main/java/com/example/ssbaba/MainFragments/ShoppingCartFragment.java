@@ -13,6 +13,7 @@ import com.example.ssbaba.R;
 import com.example.ssbaba.ShoppingCartFragmentAdapter;
 import com.example.ssbaba.categoryItem;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,6 +26,8 @@ public class ShoppingCartFragment extends android.support.v4.app.Fragment {
         ShoppingCartFragmentAdapter adapter;
         FirebaseDatabase database;
         DatabaseReference userRef,itemRef,cartRef;
+        String currentUserId;
+        FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
