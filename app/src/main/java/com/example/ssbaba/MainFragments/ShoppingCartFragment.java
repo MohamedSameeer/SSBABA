@@ -48,7 +48,6 @@ ArrayList<String> listOfItemId;
         categoryRef=database.getReference().child("Categories");
         recyclerView=view.findViewById(R.id.cart_fragment_recycler_view);
         arrayList=new ArrayList<>();
-        getListOfId();
         getListOfItems();
         adapter=new ShoppingCartFragmentAdapter(arrayList);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -58,11 +57,8 @@ ArrayList<String> listOfItemId;
         return view;
     }
 
+
     private void getListOfItems() {
-
-    }
-
-    private void getListOfId() {
         cartRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -71,7 +67,8 @@ ArrayList<String> listOfItemId;
 
 
                     categoryRef.child(snapshot.child("type").getValue().toString())
-                            .child("List").child(snapshot.child("name").getValue().toString()).addValueEventListener(new ValueEventListener() {
+                            .child("List").child(snapshot.child("name").getValue().toString())
+                            .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
