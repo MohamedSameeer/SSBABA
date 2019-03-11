@@ -71,7 +71,12 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
             }
         });
-
+        adapter.setOnCartClickListener(new CategoryActivityAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int i, View view) {
+                addToCart();
+            }
+        });
         adapter.setOnViewClickListener(new CategoryActivityAdapter.OnItemClickListener() {
             @Override
             public void onClick(int i, View view) {
@@ -85,6 +90,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                 intent.putExtra("model",categoryItem.getModel());
                 intent.putExtra("price",categoryItem.getPrice());
                 intent.putExtra("year",categoryItem.getYear());
+
 
                 startActivity(intent);
             }
@@ -112,8 +118,10 @@ public class SpecificCategoryActivity extends AppCompatActivity {
     private void addToCart(){
 
         currentItemId =arrayList.get(i).getId();
-        cart_ref.child(userId).child(currentItemId).child("status").child("added to cart");
-        cart_ref.child(userId).child(currentItemId).child("type").child(arrayList.get(i).getType());
+        cart_ref.child(userId).child(currentItemId).child("status").setValue("added to cart");
+        Log.e("type","1"+arrayList.get(i).getType());
+        cart_ref.child(userId).child(currentItemId).child("type").setValue(arrayList.get(i).getType());
+        Log.e("type","1"+arrayList.get(i).getType());
         cart_ref.child(userId).child(currentItemId).child("name").setValue(arrayList.get(i).getName());
     }
 

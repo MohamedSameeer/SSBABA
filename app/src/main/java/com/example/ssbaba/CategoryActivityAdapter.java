@@ -62,6 +62,12 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
                 onViewClickListener.onClick(i,v);
             }
         });
+        viewHolder.addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCartClickListener.onClick(i,view);
+            }
+        });
             viewHolder.name.setText(list.get(i).getName()+"");
             viewHolder.price.setText(list.get(i).getPrice()+"");
             if(list.get(i).getImage().length()<6) {
