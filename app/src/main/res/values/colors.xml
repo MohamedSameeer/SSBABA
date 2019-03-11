@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ef5350</color>
-    <color name="colorPrimaryDark">#b71c1c</color>
+    <color name="colorPrimary">#2C4157</color>
+    <color name="colorPrimaryDark">#233241</color>
     <color name="backGround">#FFC107</color>
-    <color name="colorAccent">#F4D037</color>
+    <color name="colorAccent">#FFC107</color>
     <color name="googleBackGround">#DC4E41</color>
     <color name="buttonBackGround">#233241</color>
 

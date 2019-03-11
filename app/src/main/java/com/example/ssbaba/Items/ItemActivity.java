@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,7 @@ public class ItemActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     boolean likeState;
+    Toolbar itemToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,11 @@ public class ItemActivity extends AppCompatActivity {
         addToCart = findViewById(R.id.add_to_cart_button);
         addToWishList = findViewById(R.id.add_to_wish_list_2);
         likeState = false;
+        itemToolbar = findViewById(R.id.item_toolbar);
+        setSupportActionBar(itemToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setTitle(name);
 
     }
 
