@@ -67,7 +67,7 @@ ArrayList<String> listOfItemId;
 
 
                     categoryRef.child(snapshot.child("type").getValue().toString())
-                            .child("List").child(snapshot.child("name").getValue().toString())
+                            .child("List").child(snapshot.child("id").getValue().toString())
                             .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

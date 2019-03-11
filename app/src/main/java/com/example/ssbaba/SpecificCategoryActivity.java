@@ -74,7 +74,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         adapter.setOnCartClickListener(new CategoryActivityAdapter.OnItemClickListener() {
             @Override
             public void onClick(int i, View view) {
-                addToCart();
+                addToCart(i);
             }
         });
         adapter.setOnViewClickListener(new CategoryActivityAdapter.OnItemClickListener() {
@@ -100,7 +100,6 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
 
-
     }
 
     //Sameeeeeeeeeeeeeeeeeeeeeeeeeeer
@@ -109,20 +108,20 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         Toast.makeText(SpecificCategoryActivity.this, itemId+"", Toast.LENGTH_SHORT).show();
         wish_list_ref.child(userId).child(itemId).child("value").setValue("true");
         wish_list_ref.child(userId).child(itemId).child("type").setValue(arrayList.get(i).getType());
-        wish_list_ref.child(userId).child(itemId).child("name").setValue(arrayList.get(i).getName());
+        wish_list_ref.child(userId).child(itemId).child("id").setValue(arrayList.get(i).getId());
 
 
 
     }
 
-    private void addToCart(){
+    private void addToCart(int i){
 
         currentItemId =arrayList.get(i).getId();
         cart_ref.child(userId).child(currentItemId).child("status").setValue("added to cart");
         Log.e("type","1"+arrayList.get(i).getType());
         cart_ref.child(userId).child(currentItemId).child("type").setValue(arrayList.get(i).getType());
         Log.e("type","1"+arrayList.get(i).getType());
-        cart_ref.child(userId).child(currentItemId).child("name").setValue(arrayList.get(i).getName());
+        cart_ref.child(userId).child(currentItemId).child("id").setValue(arrayList.get(i).getId());
     }
 
     private void getPhonesData() {
@@ -255,6 +254,11 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     if ((snapshot.hasChild("year"))){
                     categoryItem.setYear(snapshot.child("year").getValue().toString());}
 
+                    if ((snapshot.hasChild("id"))){
+                        categoryItem.setId(snapshot.child("id").getValue().toString());}
+
+                    if ((snapshot.hasChild("type"))){
+                        categoryItem.setType(snapshot.child("type").getValue().toString());}
 
                     arrayList.add(categoryItem);
                     Log.e("",categoryItem.getColor());

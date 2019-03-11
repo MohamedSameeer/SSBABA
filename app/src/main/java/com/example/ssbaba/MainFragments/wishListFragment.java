@@ -65,7 +65,7 @@ public class wishListFragment extends android.support.v4.app.Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    String id =snapshot.child("name").getValue().toString();
+                    String id =snapshot.child("id").getValue().toString();
                     String type=snapshot.child("type").getValue().toString();
                     category_ref.child(type).child("List").child(id).addValueEventListener(new ValueEventListener() {
                         @Override
