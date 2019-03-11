@@ -2,5 +2,9 @@
 <resources>
     <color name="colorPrimary">#ef5350</color>
     <color name="colorPrimaryDark">#b71c1c</color>
-    <color name="colorAccent">#FFC107</color>
+    <color name="backGround">#FFC107</color>
+    <color name="colorAccent">#F4D037</color>
+    <color name="googleBackGround">#DC4E41</color>
+    <color name="buttonBackGround">#233241</color>
+
 </resources>

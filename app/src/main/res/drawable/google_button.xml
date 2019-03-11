@@ -2,7 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <solid
-        android:color="@color/buttonBackGround"></solid>
-
-
+        android:color="@color/googleBackGround"></solid>
 </shape>
