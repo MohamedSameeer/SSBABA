@@ -102,14 +102,16 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         String itemId=arrayList.get(i).id;
         Toast.makeText(SpecificCategoryActivity.this, itemId+"", Toast.LENGTH_SHORT).show();
         wish_list_ref.child(userId).child(itemId).child("value").setValue("true");
+        wish_list_ref.child(userId).child(itemId).child("type").setValue(arrayList.get(i).getType());
+
+
     }
 
     private void addToCart(){
 
         currentItemId =arrayList.get(i).id;
         cart_ref.child(userId).child(currentItemId).child("status").child("added to cart");
-
-
+        cart_ref.child(userId).child(currentItemId).child("type").child(arrayList.get(i).getType());
     }
 
     private void getPhonesData() {
