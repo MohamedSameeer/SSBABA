@@ -17,13 +17,25 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
     List<categoryItem> list;
     private OnItemClickListener onItemClickListener;
 
-    public CategoryActivityAdapter(List<categoryItem> list, OnItemClickListener onItemClickListener){
+    private OnItemClickListener onLikeClickListener;
+    private OnItemClickListener onCartClickListener;
+    private OnItemClickListener onViewClickListener;
 
+    public CategoryActivityAdapter(List<categoryItem> list){
         this.list=list;
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+
+    public void setOnLikeClickListener(OnItemClickListener onLikeClickListener) {
+        this.onLikeClickListener = onLikeClickListener;
+    }
+
+    public void setOnCartClickListener(OnItemClickListener onCartClickListener) {
+        this.onCartClickListener = onCartClickListener;
+    }
+
+    public void setOnViewClickListener(OnItemClickListener onViewClickListener) {
+        this.onViewClickListener = onViewClickListener;
     }
 
     @NonNull
@@ -40,11 +52,16 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
         viewHolder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickListener.onClick(i);
+                onLikeClickListener.onClick(i,v);
 
             }
         });
-
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onViewClickListener.onClick(i,v);
+            }
+        });
             viewHolder.name.setText(list.get(i).getName()+"");
             viewHolder.price.setText(list.get(i).getPrice()+"");
             if(list.get(i).getImage().length()<6) {
@@ -84,7 +101,6 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
         }
     }
     public interface OnItemClickListener {
-        void onClick(int i);
-
+        void onClick(int i,View view);
     }
 }

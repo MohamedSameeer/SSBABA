@@ -59,11 +59,22 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
         }
 
-        adapter = new CategoryActivityAdapter(arrayList, new CategoryActivityAdapter.OnItemClickListener() {
+        adapter = new CategoryActivityAdapter(arrayList) ;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        adapter.setOnLikeClickListener(new CategoryActivityAdapter.OnItemClickListener() {
             @Override
-            public void onClick(int i) {
+            public void onClick(int i, View v) {
+                addToWishList(i);
 
 
+            }
+        });
+
+        adapter.setOnViewClickListener(new CategoryActivityAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int i, View view) {
                 Intent intent = new Intent(SpecificCategoryActivity.this, ItemActivity.class);
 
                 categoryItem categoryItem=arrayList.get(i);
@@ -150,6 +161,8 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     categoryItem.setName(snapshot.child("name").getValue().toString());
                     categoryItem.setPrice(snapshot.child("price").getValue().toString());
                     categoryItem.setYear(snapshot.child("year").getValue().toString());
+                    categoryItem.setType(snapshot.child("type").getValue().toString());
+                    categoryItem.setId(snapshot.child("id").getValue().toString());
                     arrayList.add(categoryItem);
                     Log.e("",categoryItem.getColor());
                     adapter.notifyDataSetChanged();
@@ -181,6 +194,8 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     categoryItem.setName(snapshot.child("name").getValue().toString());
                     categoryItem.setPrice(snapshot.child("price").getValue().toString());
                     categoryItem.setYear(snapshot.child("year").getValue().toString());
+                    categoryItem.setType(snapshot.child("type").getValue().toString());
+                    categoryItem.setId(snapshot.child("id").getValue().toString());
                     arrayList.add(categoryItem);
                     Log.e("",categoryItem.getColor());
 
