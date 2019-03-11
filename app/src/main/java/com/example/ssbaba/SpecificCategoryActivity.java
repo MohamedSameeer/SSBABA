@@ -103,6 +103,8 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         Toast.makeText(SpecificCategoryActivity.this, itemId+"", Toast.LENGTH_SHORT).show();
         wish_list_ref.child(userId).child(itemId).child("value").setValue("true");
         wish_list_ref.child(userId).child(itemId).child("type").setValue(arrayList.get(i).getType());
+        wish_list_ref.child(userId).child(itemId).child("name").setValue(arrayList.get(i).getName());
+
 
 
     }
@@ -112,6 +114,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         currentItemId =arrayList.get(i).getId();
         cart_ref.child(userId).child(currentItemId).child("status").child("added to cart");
         cart_ref.child(userId).child(currentItemId).child("type").child(arrayList.get(i).getType());
+        cart_ref.child(userId).child(currentItemId).child("name").setValue(arrayList.get(i).getName());
     }
 
     private void getPhonesData() {
