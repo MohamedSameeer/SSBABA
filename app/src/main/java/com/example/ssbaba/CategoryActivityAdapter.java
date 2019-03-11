@@ -41,16 +41,10 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
             @Override
             public void onClick(View v) {
                 onItemClickListener.onClick(i);
-            }
-        });
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onItemClickListener != null)
-                    onItemClickListener.onClick(i);
 
             }
         });
+
             viewHolder.name.setText(list.get(i).getName()+"");
             viewHolder.price.setText(list.get(i).getPrice()+"");
             if(list.get(i).getImage().length()<6) {
@@ -79,16 +73,18 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
         ImageView imageView;
         TextView name;
         TextView price;
-        Button like;
+        Button like,addToCart;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.item_pic);
             name=itemView.findViewById(R.id.name);
             price=itemView.findViewById(R.id.price);
             like=itemView.findViewById(R.id.add_to_wish_list);
+            addToCart=itemView.findViewById(R.id.add_to_cart_button);
         }
     }
     public interface OnItemClickListener {
         void onClick(int i);
+
     }
 }

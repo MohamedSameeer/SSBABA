@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.ssbaba.Items.ItemActivity;
@@ -24,11 +25,11 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference,wish_list_ref;
+    DatabaseReference databaseReference,wish_list_ref,cart_ref;
     ArrayList<categoryItem> arrayList;
     CategoryActivityAdapter adapter;
     FirebaseAuth mAuth;
-    String userId;
+    String userId,currentItemId;
     int i;
 
     @Override
@@ -41,6 +42,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Categories");
         wish_list_ref=firebaseDatabase.getReference().child("wish_list");
+        cart_ref=firebaseDatabase.getReference().child("cart");
         recyclerView = findViewById(R.id.category_recycler_view);
         arrayList = new ArrayList<>();
         i = getIntent().getIntExtra("i",0);
@@ -61,6 +63,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(int i) {
 
+
                 Intent intent = new Intent(SpecificCategoryActivity.this, ItemActivity.class);
 
                 categoryItem categoryItem=arrayList.get(i);
@@ -78,12 +81,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        adapter.setOnItemClickListener(new CategoryActivityAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int i) {
-                addToWishList(i);
-            }
-        });
+
 
 
     }
@@ -93,6 +91,14 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         String itemId=arrayList.get(i).id;
         Toast.makeText(SpecificCategoryActivity.this, itemId+"", Toast.LENGTH_SHORT).show();
         wish_list_ref.child(userId).child(itemId).child("value").setValue("true");
+    }
+
+    private void addToCart(){
+
+        currentItemId =arrayList.get(i).id;
+        cart_ref.child(userId).child(currentItemId).child("status").child("added to cart");
+
+
     }
 
     private void getPhonesData() {
