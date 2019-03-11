@@ -1,6 +1,7 @@
 package com.example.ssbaba.Regestration;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -24,8 +25,11 @@ public class PresenterRegestration {
     private boolean x ;
     private DatabaseReference userRef;
     private IViewRegestration iViewRegestration;
-    public PresenterRegestration(Context context){
+    private ProgressDialog loading;
+
+    public PresenterRegestration(Context context , ProgressDialog loading){
         this.context=context;
+        this.loading=loading;
         mAuth=FirebaseAuth.getInstance();
         userRef= FirebaseDatabase.getInstance().getReference().child("Users");
         iViewRegestration=new ActivityRegestration();
@@ -46,12 +50,16 @@ public class PresenterRegestration {
         }
         if(flag){
             Log.e("Activity Regestration","Done");
+            this.loading.setTitle("Sign In");
+            this.loading.setMessage("Please Wait....");
+            this.loading.setCanceledOnTouchOutside(true);
+            this.loading.show();
             createNewUser();
         }
     }
 
 
-    public boolean createNewUser() {
+    public void createNewUser() {
 
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -60,15 +68,15 @@ public class PresenterRegestration {
                         if(task.isSuccessful()){
                             String user=mAuth.getCurrentUser().getUid();
                             createUserDatabase(user);
+                            loading.dismiss();
                             Log.e("Presenter Regestration","creating new Account Successful ");
 
                         }else {
                             Log.e("Presenter Regestration","signInWithEmail:failure", task.getException());
-                            x=false;
+                           loading.dismiss();
                         }
                     }
                 });
-            return x;
     }
 
     private void createUserDatabase(final String user) {

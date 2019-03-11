@@ -34,17 +34,17 @@ public class PresenterLogin {
     IViewLogin iViewLogin;
     ProgressDialog loading;
     ActivityLogin activityLogin;
-    public PresenterLogin(Context context){
+    public PresenterLogin(Context context,ProgressDialog loading){
         this.context=context;
         mAuth=FirebaseAuth.getInstance();
+        this.loading=loading;
         iViewLogin=new ActivityLogin();
     }
 
 
-    public void loginWithAccount(EditText email, EditText password, ProgressDialog loading) {
+    public void loginWithAccount(EditText email, EditText password) {
         sEmail=email.getText().toString().trim();
         sPassword=password.getText().toString().trim();
-        this.loading=loading;
         boolean flag=true;
         if(sEmail.trim().isEmpty()){
             email.setError("can't leave this field empty");
@@ -92,11 +92,13 @@ public class PresenterLogin {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.e("PresenterLogin","Successful Login with Google Account");
                 if (account != null) {
+
                     firebaseAuthWithGoogle(account);
                 }
 
             } catch (ApiException e) {
                 Log.e(TAG, "Google sign in failed", e);
+                loading.dismiss();
 
             }
         }
@@ -112,10 +114,12 @@ public class PresenterLogin {
                             // Sign in success, update UI with the signed-in user's information
                             Log.e(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            loading.dismiss();
                             iViewLogin.StartMainActivity();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "signInWithCredential:failure", task.getException());
+                            loading.dismiss();
                         }
 
                         // ...

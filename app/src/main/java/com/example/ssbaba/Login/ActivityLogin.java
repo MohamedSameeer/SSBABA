@@ -41,12 +41,12 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
 
         intialzation();
         context=getBaseContext();
-        presenterLogin=new PresenterLogin(getContext());
+        presenterLogin=new PresenterLogin(getContext(),loading);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               presenterLogin.loginWithAccount(email,password,loading);
+               presenterLogin.loginWithAccount(email,password);
 
             }
         });
@@ -57,6 +57,10 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
 
                 mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
                 Intent intent=mGoogleSignInClient.getSignInIntent();
+                loading.setTitle("Sign In");
+                loading.setMessage("Please Wait....");
+                loading.setCanceledOnTouchOutside(true);
+                loading.show();
                 startActivityForResult(intent,RC_SIGN_IN);
 
 
@@ -84,11 +88,12 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
         signIn=findViewById(R.id.sign_in);
         dontHaveAcc=findViewById(R.id.dont_have_acc);
         signWithGoodleAccount=findViewById(R.id.sign_in_with_google);
+        loading=new ProgressDialog(this);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        loading=new ProgressDialog(this);
+
     }
 
 

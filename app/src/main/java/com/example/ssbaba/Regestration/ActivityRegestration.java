@@ -1,5 +1,6 @@
 package com.example.ssbaba.Regestration;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -24,6 +25,7 @@ public class ActivityRegestration extends AppCompatActivity implements IViewRege
     String sEmail,sPassword;
     PresenterRegestration presenterRegestration;
     Button signUp;
+    ProgressDialog loading;
     public static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class ActivityRegestration extends AppCompatActivity implements IViewRege
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         intialzation();
-        presenterRegestration=new PresenterRegestration(getApplicationContext());
+        presenterRegestration=new PresenterRegestration(getApplicationContext(),loading);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +48,7 @@ public class ActivityRegestration extends AppCompatActivity implements IViewRege
 
 
     private void intialzation(){
+        loading=new ProgressDialog(this);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         signUp=findViewById(R.id.sign_up);

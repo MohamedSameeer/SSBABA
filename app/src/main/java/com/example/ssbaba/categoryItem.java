@@ -1,15 +1,7 @@
 package com.example.ssbaba;
 
 public class categoryItem {
-    String color;
-    String description ;
-    String image;
-    String model;
-    String name;
-    String price;
-    String year ;
-    String id;
-    String type;
+   private String color,description ,image,model,name,price,year ,id,type;
 
     public String getType() {
         return type;
