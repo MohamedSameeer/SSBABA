@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.ssbaba.Login.ActivityLogin;
 import com.example.ssbaba.R;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +34,8 @@ public class ProfileFragment extends Fragment {
     TextView userNameTv;
     FirebaseDatabase database;
     DatabaseReference userRef;
-   String userName;
+    String userName;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -46,6 +48,7 @@ public class ProfileFragment extends Fragment {
         userRef=database.getReference().child("Users");
         userNameTv=view.findViewById(R.id.user_name_tv);
         getUserData();
+
         //userNameTv.setText(userName);
 
 
@@ -78,9 +81,14 @@ public class ProfileFragment extends Fragment {
         userRef.child(currentUser).child("first_name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue().toString().isEmpty()){
+                    userName="no name found";
+
+                }
+                else{
                 userName=dataSnapshot.getValue().toString();
-                Log.e("hello",userName);
-                userNameTv.setText(userName);
+                Log.e("hello",userName);}
+                userNameTv.setText(userName+"");
             }
 
             @Override

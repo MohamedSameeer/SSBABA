@@ -9,6 +9,15 @@
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="Profile" />
+    <item
+        android:id="@+id/nav_wish_list"
+        android:icon="@drawable/ic_loyalty_black_24dp"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_cart"
+        android:icon="@drawable/ic_add_shopping_cart_black_24dp"
+        android:title="Profile" />
 
 
 </menu>

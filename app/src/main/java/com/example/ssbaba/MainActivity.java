@@ -20,6 +20,8 @@ import android.widget.ViewFlipper;
 import com.example.ssbaba.Login.ActivityLogin;
 import com.example.ssbaba.MainFragments.HomeFragment;
 import com.example.ssbaba.MainFragments.ProfileFragment;
+import com.example.ssbaba.MainFragments.ShoppingCartFragment;
+import com.example.ssbaba.MainFragments.wishListFragment;
 import com.example.ssbaba.getUserInfo.getUserInfoActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -103,6 +105,13 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.nav_home:
                             selectedFragment = new HomeFragment();
+                            break;
+
+                        case R.id.nav_wish_list:
+                            selectedFragment = new wishListFragment();
+                            break;
+                        case R.id.nav_cart:
+                            selectedFragment = new ShoppingCartFragment();
                             break;
                         case R.id.nav_profile:
                             selectedFragment = new ProfileFragment();

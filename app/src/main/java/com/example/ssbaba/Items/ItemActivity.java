@@ -37,25 +37,22 @@ public class ItemActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     boolean likeState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
         FirebaseApp.initializeApp(this);
-        mAuth=FirebaseAuth.getInstance();
-        currentUser=mAuth.getCurrentUser().getUid();
-        database=FirebaseDatabase.getInstance();
-        databaseReference =database.getReference().child("WishList");
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser().getUid();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference().child("WishList");
         intializeFields();
         getData();
         Preview();
 
 
-
     }
-
-
-
 
 
     private void Preview() {
@@ -93,10 +90,9 @@ public class ItemActivity extends AppCompatActivity {
         itemYear = findViewById(R.id.year);
         addToCart = findViewById(R.id.add_to_cart_button);
         addToWishList = findViewById(R.id.add_to_wish_list_2);
-        likeState=false;
+        likeState = false;
 
     }
-
 
 
 }
