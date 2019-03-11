@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.ssbaba.Items.ItemActivity;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,9 +24,11 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference,wish_list;
+    DatabaseReference databaseReference,wish_list_ref;
     ArrayList<categoryItem> arrayList;
     CategoryActivityAdapter adapter;
+    FirebaseAuth mAuth;
+    String userId;
     int i;
 
     @Override
@@ -32,8 +36,11 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specific_category);
         FirebaseApp.initializeApp(this);
+        mAuth=FirebaseAuth.getInstance();
+        userId=mAuth.getCurrentUser().getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Categories");
+        wish_list_ref=firebaseDatabase.getReference().child("wish_list");
         recyclerView = findViewById(R.id.category_recycler_view);
         arrayList = new ArrayList<>();
         i = getIntent().getIntExtra("i",0);
@@ -74,11 +81,18 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new CategoryActivityAdapter.OnItemClickListener() {
             @Override
             public void onClick(int i) {
-                arrayList.get(i);
+                addToWishList(i);
             }
         });
 
 
+    }
+
+    //Sameeeeeeeeeeeeeeeeeeeeeeeeeeer
+    private void addToWishList(int i) {
+        String itemId=arrayList.get(i).id;
+        Toast.makeText(SpecificCategoryActivity.this, itemId+"", Toast.LENGTH_SHORT).show();
+        wish_list_ref.child(userId).child(itemId).child("value").setValue("true");
     }
 
     private void getPhonesData() {
@@ -96,6 +110,8 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     categoryItem.setName(snapshot.child("name").getValue().toString());
                     categoryItem.setPrice(snapshot.child("price").getValue().toString());
                     categoryItem.setYear(snapshot.child("year").getValue().toString());
+                    categoryItem.setId(snapshot.child("id").getValue().toString());
+                    categoryItem.setType(snapshot.child("type").getValue().toString());
                     arrayList.add(categoryItem);
                     Log.e("",categoryItem.getColor());
 
