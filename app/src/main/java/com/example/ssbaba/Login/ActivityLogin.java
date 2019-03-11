@@ -1,5 +1,6 @@
 package com.example.ssbaba.Login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.ssbaba.MainActivity;
@@ -23,16 +25,15 @@ import com.google.android.gms.common.SignInButton;
 public class ActivityLogin extends AppCompatActivity implements IViewLogin {
     EditText email,password;
     Button signIn;
-    boolean flag;
     TextView dontHaveAcc;
     SignInButton signWithGoodleAccount;
     String sEmail,sPassword;
     PresenterLogin presenterLogin;
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInOptions gso;
-    PresenterLogin presenterLoginDefault;
     final int RC_SIGN_IN =0;
     static Context context;
+    ProgressDialog loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,8 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               presenterLogin.loginWithAccount(email,password);
+               presenterLogin.loginWithAccount(email,password,loading);
+
             }
         });
         signWithGoodleAccount.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +85,10 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
         dontHaveAcc=findViewById(R.id.dont_have_acc);
         signWithGoodleAccount=findViewById(R.id.sign_in_with_google);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+        loading=new ProgressDialog(this);
     }
 
 
@@ -112,7 +116,7 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
     public void StartMainActivity() {
         Intent i=new Intent(ActivityLogin.getContext(), MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-       ActivityLogin.getContext().startActivity(i);
+        ActivityLogin.getContext().startActivity(i);
         finish();
     }
 }

@@ -5,24 +5,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivityAdapter.ViewHolder> {
     List<categoryItem> list;
-    private OnClickListener onClickListener;
+    private OnItemClickListener onItemClickListener;
 
-    public CategoryActivityAdapter(List<categoryItem> list, OnClickListener onClickListener){
+    public CategoryActivityAdapter(List<categoryItem> list, OnItemClickListener onItemClickListener){
 
         this.list=list;
-        this.onClickListener=onClickListener;
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     @NonNull
     @Override
@@ -35,12 +37,17 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
 
-
+        viewHolder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onClick(i);
+            }
+        });
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onClickListener != null)
-                    onClickListener.onClick(i);
+                if (onItemClickListener != null)
+                    onItemClickListener.onClick(i);
 
             }
         });
@@ -72,15 +79,16 @@ public class CategoryActivityAdapter extends RecyclerView.Adapter<CategoryActivi
         ImageView imageView;
         TextView name;
         TextView price;
+        Button like;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.item_pic);
             name=itemView.findViewById(R.id.name);
             price=itemView.findViewById(R.id.price);
-
+            like=itemView.findViewById(R.id.add_to_wish_list);
         }
     }
-    public interface OnClickListener {
+    public interface OnItemClickListener {
         void onClick(int i);
     }
 }

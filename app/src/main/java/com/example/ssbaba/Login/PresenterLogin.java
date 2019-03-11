@@ -1,6 +1,7 @@
 package com.example.ssbaba.Login;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -31,6 +32,7 @@ public class PresenterLogin {
     FirebaseAuth mAuth;
     boolean x;
     IViewLogin iViewLogin;
+    ProgressDialog loading;
     ActivityLogin activityLogin;
     public PresenterLogin(Context context){
         this.context=context;
@@ -39,9 +41,10 @@ public class PresenterLogin {
     }
 
 
-    public void loginWithAccount(EditText email, EditText password) {
+    public void loginWithAccount(EditText email, EditText password, ProgressDialog loading) {
         sEmail=email.getText().toString().trim();
         sPassword=password.getText().toString().trim();
+        this.loading=loading;
         boolean flag=true;
         if(sEmail.trim().isEmpty()){
             email.setError("can't leave this field empty");
@@ -53,6 +56,10 @@ public class PresenterLogin {
         }
         if(flag==true){
             Log.e("Activity Login","Done");
+            this.loading.setTitle("Sign In");
+            this.loading.setMessage("Please Wait....");
+            this.loading.setCanceledOnTouchOutside(true);
+            this.loading.show();
             loginWithMyAccount();
         }
     }
@@ -65,10 +72,12 @@ public class PresenterLogin {
                         if (task.isSuccessful()){
                             FirebaseUser user=mAuth.getCurrentUser();
                             Log.e("Presenter Login", "signInWithEmail:success");
+                            loading.dismiss();
                             iViewLogin.StartMainActivity();
                         }
                         else {
                             // If sign in fails, display a message to the user.
+                            loading.dismiss();
                             Log.e("Presenter Login", "signInWithEmail:failure", task.getException());
                         }
                     }

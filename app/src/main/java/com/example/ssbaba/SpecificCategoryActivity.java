@@ -16,15 +16,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class SpecificCategoryActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,wish_list;
     ArrayList<categoryItem> arrayList;
     CategoryActivityAdapter adapter;
     int i;
@@ -52,7 +50,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
         }
 
-        adapter = new CategoryActivityAdapter(arrayList, new CategoryActivityAdapter.OnClickListener() {
+        adapter = new CategoryActivityAdapter(arrayList, new CategoryActivityAdapter.OnItemClickListener() {
             @Override
             public void onClick(int i) {
 
@@ -73,6 +71,12 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        adapter.setOnItemClickListener(new CategoryActivityAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int i) {
+                arrayList.get(i);
+            }
+        });
 
 
     }
