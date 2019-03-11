@@ -99,7 +99,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
     //Sameeeeeeeeeeeeeeeeeeeeeeeeeeer
     private void addToWishList(int i) {
-        String itemId=arrayList.get(i).id;
+        String itemId=arrayList.get(i).getId();
         Toast.makeText(SpecificCategoryActivity.this, itemId+"", Toast.LENGTH_SHORT).show();
         wish_list_ref.child(userId).child(itemId).child("value").setValue("true");
         wish_list_ref.child(userId).child(itemId).child("type").setValue(arrayList.get(i).getType());
@@ -109,7 +109,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
     private void addToCart(){
 
-        currentItemId =arrayList.get(i).id;
+        currentItemId =arrayList.get(i).getId();
         cart_ref.child(userId).child(currentItemId).child("status").child("added to cart");
         cart_ref.child(userId).child(currentItemId).child("type").child(arrayList.get(i).getType());
     }

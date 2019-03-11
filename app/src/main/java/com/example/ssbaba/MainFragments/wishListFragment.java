@@ -24,7 +24,7 @@ public class wishListFragment extends android.support.v4.app.Fragment {
 
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth mAuth;
-    DatabaseReference wish_list_ref;
+    DatabaseReference wish_list_ref,category_ref;
     String user_id;
     View view;
     List<categoryItem> listOfWish;
@@ -37,12 +37,13 @@ public class wishListFragment extends android.support.v4.app.Fragment {
         firebaseDatabase=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
         user_id=mAuth.getCurrentUser().getUid();
+        category_ref=firebaseDatabase.getReference().child("Categories");
         wish_list_ref=firebaseDatabase.getReference().child("wish_list");
         wish_list_ref.child(user_id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-            //    listOfWish.add(dataSnapshot.child("type"));
+                String
+               listOfWish.add();
             }
 
             @Override
