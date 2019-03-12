@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="170dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#63636F"
     android:paddingBottom="15dp"
-    android:paddingLeft="20dp"
+    android:paddingLeft="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
     android:gravity="bottom"
-
+    tools:context=".MainActivity"
     >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        app:srcCompat="@mipmap/ic_launcher_round"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:paddingTop="12dp"
+        android:paddingLeft="6dp"
+
+        app:srcCompat="@drawable/anonuser"
         android:contentDescription="Android Studio"
-        android:id="@+id/imageView" />
+        android:id="@+id/userImageView_nav" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:id="@+id/userName_nav"
         android:text="name"
         android:paddingTop="8dp"
+        android:paddingLeft="10dp"
+
 
         />
 
@@ -34,8 +38,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="mail"
-        android:id="@+id/textView"
+        android:id="@+id/userMail_nav"
         android:paddingTop="8dp"
+        android:paddingLeft="10dp"
+
 
         />
 

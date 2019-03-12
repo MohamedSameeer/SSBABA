@@ -1,13 +1,17 @@
 package com.example.ssbaba;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ssbaba.Items.ItemActivity;
@@ -31,7 +35,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     String userId,currentItemId;
     int i;
-
+    Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,21 @@ public class SpecificCategoryActivity extends AppCompatActivity {
         wish_list_ref=firebaseDatabase.getReference().child("wish_list");
         cart_ref=firebaseDatabase.getReference().child("cart");
         recyclerView = findViewById(R.id.category_recycler_view);
+
+
+        mToolbar = (Toolbar) findViewById(R.id.spceific_toolbar);
+        mToolbar.setTitle(getString(R.string.app_name));
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+
+
         arrayList = new ArrayList<>();
         i = getIntent().getIntExtra("i",0);
         Log.e("",i+"");

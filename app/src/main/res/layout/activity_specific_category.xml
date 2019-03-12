@@ -8,7 +8,7 @@
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="60dp"
         android:id="@+id/spceific_toolbar"
         />
     <android.support.v7.widget.RecyclerView

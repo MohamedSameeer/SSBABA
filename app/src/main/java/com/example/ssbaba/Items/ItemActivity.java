@@ -38,8 +38,8 @@ public class ItemActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     boolean likeState;
-    Toolbar itemToolbar;
 
+    Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +49,18 @@ public class ItemActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference().child("WishList");
+
+        mToolbar = (Toolbar) findViewById(R.id.item_toolbar);
+        mToolbar.setTitle(getString(R.string.app_name));
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
         intializeFields();
         getData();
         Preview();
@@ -93,12 +105,12 @@ public class ItemActivity extends AppCompatActivity {
         addToCart = findViewById(R.id.add_to_cart_button);
         addToWishList = findViewById(R.id.add_to_wish_list_2);
         likeState = false;
-        itemToolbar = findViewById(R.id.item_toolbar);
+       /* itemToolbar = findViewById(R.id.item_toolbar);
         setSupportActionBar(itemToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setTitle(name);
-
+*/
     }
 
 
