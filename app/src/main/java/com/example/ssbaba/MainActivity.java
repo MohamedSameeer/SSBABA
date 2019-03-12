@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+
 import com.example.ssbaba.Login.ActivityLogin;
 import com.example.ssbaba.MainFragments.HomeFragment;
 import com.example.ssbaba.MainFragments.ProfileFragment;
@@ -45,32 +46,29 @@ import java.util.Map;
 
 import static com.example.ssbaba.Regestration.ActivityRegestration.getContext;
 
-public class MainActivity extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FirebaseUser user;
     BottomNavigationView bottomNav;
     FirebaseAuth mAuth;
     DatabaseReference userRef;
-   String uId;
+    String uId;
+    private FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
 
-        //mAuth=FirebaseAuth.getInstance();
+        mAuth=FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
-        user=FirebaseAuth.getInstance().getCurrentUser();
-        uId=user.getUid();
-        userRef=FirebaseDatabase.getInstance().getReference().child("Users").child(uId);
 
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        
 
         drawer.addDrawerListener(toggle);
 
@@ -84,7 +82,6 @@ public class MainActivity extends AppCompatActivity   implements NavigationView.
                 new HomeFragment()).commit();
 
     }
-
 
 
     @Override
@@ -121,13 +118,13 @@ public class MainActivity extends AppCompatActivity   implements NavigationView.
             case R.id.nav_Log_out:
                 mAuth.signOut();
 
-                Intent intent=new Intent(MainActivity.this, ActivityLogin.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(MainActivity.this, ActivityLogin.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
-                default:
-                    selectedFragment = new HomeFragment();
-                    break;
+            default:
+                selectedFragment = new HomeFragment();
+                break;
 
         }
 
@@ -138,52 +135,30 @@ public class MainActivity extends AppCompatActivity   implements NavigationView.
         return true;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
-        if(user==null){
-            Intent i=new Intent(MainActivity.this, ActivityLogin.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        if (user == null) {
+            Intent i = new Intent(MainActivity.this, ActivityLogin.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
             finish();
-        }
-        else{
-
+        } else {
+            uId = mAuth.getCurrentUser().getUid();
+            userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uId);
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.child("first_name").exists()){
-                            Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                        }else
-                        {
-                            Intent intent=new Intent(MainActivity.this, getUserInfoActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
+                    if (dataSnapshot.child("first_name").exists()) {
+                        Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(MainActivity.this, getUserInfoActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
 
 
-                        }
+                    }
                 }
 
                 @Override
@@ -225,7 +200,7 @@ public class MainActivity extends AppCompatActivity   implements NavigationView.
             };
 */
 
-    }
+}
 
 
 
