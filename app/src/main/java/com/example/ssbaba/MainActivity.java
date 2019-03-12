@@ -146,9 +146,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_Log_out:
                 mAuth.signOut();
 
-                Intent intent = new Intent(MainActivity.this, ActivityLogin.class);
+                Intent intent = new Intent(MainActivity.this, Splash.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
                 break;
             default:
                 selectedFragment = new HomeFragment();
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
 
         if (user == null) {
-            Intent i = new Intent(MainActivity.this, ActivityLogin.class);
+            Intent i = new Intent(MainActivity.this,Splash.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
             finish();
@@ -178,11 +179,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.child("first_name").exists()) {
+                    if (dataSnapshot.child("first_name").exists() &&dataSnapshot.child("last_name").exists()) {
                         String firstName = dataSnapshot.child("first_name").getValue().toString();
                         String lastName = dataSnapshot.child("last_name").getValue().toString();
 
-                        Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                         showUserDataInNav(firstName, lastName);
 
                         if (dataSnapshot.hasChild("image")) {

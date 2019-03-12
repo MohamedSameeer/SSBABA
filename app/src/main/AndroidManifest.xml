@@ -15,9 +15,14 @@
             android:name=".getUserInfo.getUserInfoActivity"
             android:label="@string/title_activity_get_user_info"></activity>
         <activity android:name=".Items.ItemActivity" />
-        <activity android:name=".Login.ActivityLogin"></activity>
+        <activity android:name=".Login.ActivityLogin">
+
+        </activity>
         <activity android:name=".Regestration.ActivityRegestration" />
         <activity android:name=".SpecificCategoryActivity" />
+        <activity android:name=".Splash" >
+
+        </activity>
         <activity android:name=".MainActivity">
 
             <intent-filter>

@@ -25,7 +25,7 @@ public class Splash extends AppCompatActivity {
     TextView signUp;
     GoogleSignInClient mGoogleSignInClient;
     ProgressDialog loading;
-    Context context;
+    static Context context;
     PresenterLogin presenterLogin;
     GoogleSignInOptions gso;
     final int RC_SIGN_IN =0;
@@ -65,6 +65,9 @@ public class Splash extends AppCompatActivity {
                 startActivityForResult(intent,RC_SIGN_IN);
             }
         });
+    }
+    private static Context getContext(){
+        return context;
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

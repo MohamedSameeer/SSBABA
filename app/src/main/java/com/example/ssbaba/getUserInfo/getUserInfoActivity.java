@@ -1,5 +1,6 @@
 package com.example.ssbaba.getUserInfo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
@@ -26,12 +27,14 @@ public class getUserInfoActivity extends Activity {
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     DatabaseReference userRef;
+    static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_user_info);
         FirebaseApp.initializeApp(this);
+        context=getBaseContext();
         mAuth=FirebaseAuth.getInstance();
         currentUser=mAuth.getCurrentUser().getUid();
         database=FirebaseDatabase.getInstance();
@@ -47,7 +50,9 @@ public class getUserInfoActivity extends Activity {
         });
 
     }
-
+    private static Context getContext(){
+        return context;
+    }
     private void intializeFields() {
         firstNameEt=findViewById(R.id.first_name_et);
         lastNameEt=findViewById(R.id.last_name_et);
@@ -68,20 +73,28 @@ public class getUserInfoActivity extends Activity {
         }
         else{
 
-            userRef.child(currentUser).child("first_name").setValue(firstName);
-            userRef.child(currentUser).child("last_name").setValue(lastName).addOnCompleteListener(new OnCompleteListener<Void>() {
+            userRef.child(currentUser).child("first_name").setValue(firstName).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
+                    userRef.child(currentUser).child("last_name").setValue(lastName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
 
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class );
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
-                        finish();
+                                Intent i = new Intent(getContext(), MainActivity.class );
+                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(i);
+                                finish();
 
-                    }
+                            }
+                        }
+                    });
+
+                }
                 }
             });
+
 
 
         }
