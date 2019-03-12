@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.example.ssbaba.Login.ActivityLogin;
@@ -27,6 +29,8 @@ public class ActivityRegestration extends AppCompatActivity implements IViewRege
     Button signUp;
     ProgressDialog loading;
     public static Context context;
+    CheckBox showPass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,19 @@ public class ActivityRegestration extends AppCompatActivity implements IViewRege
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         intialzation();
+
+        showPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(showPass.isChecked()){
+                    password.setTransformationMethod(null);
+
+                }else
+                {
+                    password.setTransformationMethod(new PasswordTransformationMethod());
+                }
+            }
+        });
         presenterRegestration=new PresenterRegestration(getApplicationContext(),loading);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +69,7 @@ public class ActivityRegestration extends AppCompatActivity implements IViewRege
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         signUp=findViewById(R.id.sign_up);
+        showPass=findViewById(R.id.chk_box);
     }
 
     public static Context getContext() {

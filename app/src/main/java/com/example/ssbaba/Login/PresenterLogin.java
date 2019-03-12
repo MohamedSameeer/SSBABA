@@ -10,8 +10,10 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ssbaba.IViewSplash;
 import com.example.ssbaba.MainActivity;
 import com.example.ssbaba.R;
+import com.example.ssbaba.Splash;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,6 +40,7 @@ public class PresenterLogin {
     Context context;
     FirebaseAuth mAuth;
     boolean x;
+    IViewSplash iViewSplash;
     IViewLogin iViewLogin;
     EditText mTxtPassword,mTxtEmail;
     ProgressDialog loading;
@@ -47,6 +50,7 @@ public class PresenterLogin {
         mAuth=FirebaseAuth.getInstance();
         this.loading=loading;
         iViewLogin=new ActivityLogin();
+        iViewSplash=new Splash();
     }
 
 
@@ -199,7 +203,7 @@ public class PresenterLogin {
                             Log.e(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             loading.dismiss();
-                            iViewLogin.StartMainActivity();
+                            iViewSplash.StartMainActivity();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e(TAG, "signInWithCredential:failure", task.getException());

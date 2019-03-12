@@ -38,8 +38,8 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        intialzation();
         context=getBaseContext();
+        intialzation();
         showPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,10 +102,5 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
         finish();
     }
 
-    @Override
-    public void getException(String exception) {
-        email.setError(exception);
-        email.requestFocus();
 
-    }
 }

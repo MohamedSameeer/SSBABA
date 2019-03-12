@@ -19,6 +19,7 @@ import com.example.ssbaba.Login.ActivityLogin;
 import com.example.ssbaba.MainActivity;
 import com.example.ssbaba.R;
 
+import com.example.ssbaba.Splash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -104,7 +105,7 @@ public class ProfileFragment extends Fragment {
 
     private void sinOut() {
         mAuth.signOut();
-        Intent intent = new Intent(getContext(), ActivityLogin.class);
+        Intent intent = new Intent(getContext(), Splash.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         getActivity().finish();

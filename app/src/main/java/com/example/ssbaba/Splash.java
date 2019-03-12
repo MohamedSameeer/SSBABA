@@ -19,7 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import static com.example.ssbaba.Regestration.ActivityRegestration.getContext;
 
-public class Splash extends AppCompatActivity {
+public class Splash extends AppCompatActivity implements IViewSplash {
 
     Button login,googleAcc;
     TextView signUp;
@@ -56,7 +56,7 @@ public class Splash extends AppCompatActivity {
         googleAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
+                mGoogleSignInClient = GoogleSignIn.getClient(Splash.getContext(), gso);
                 Intent intent=mGoogleSignInClient.getSignInIntent();
                 loading.setTitle("Sign In");
                 loading.setMessage("Please Wait....");
@@ -87,4 +87,13 @@ public class Splash extends AppCompatActivity {
                 .build();
 
     }
+    @Override
+    public void StartMainActivity() {
+        Intent i=new Intent(Splash.getContext(), MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Splash.getContext().startActivity(i);
+        finish();
+    }
+
 }
+
