@@ -8,6 +8,29 @@
     android:background="#fff"
     >
 
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/login_toolbar"
+
+        />
+
+
+    <ImageView
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:fontFamily="cursive"
+    android:src="@drawable/logo"
+    android:textColor="#ffffff"
+
+    android:textStyle="italic"
+    android:id="@+id/ssbaba"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.18" />
 
     <EditText
         android:id="@+id/email"

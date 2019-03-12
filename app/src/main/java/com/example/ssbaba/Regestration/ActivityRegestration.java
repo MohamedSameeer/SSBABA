@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +31,7 @@ public class ActivityRegestration extends AppCompatActivity implements IViewRege
     ProgressDialog loading;
     public static Context context;
     CheckBox showPass;
-
+        Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,15 @@ public class ActivityRegestration extends AppCompatActivity implements IViewRege
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         intialzation();
+        mToolbar = (Toolbar) findViewById(R.id.registeration_toolbar);
+        mToolbar.setTitle(getString(R.string.app_name));
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         showPass.setOnClickListener(new View.OnClickListener() {
             @Override

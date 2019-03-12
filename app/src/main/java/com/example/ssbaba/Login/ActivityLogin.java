@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
     static Context context;
     ProgressDialog loading;
     CheckBox showPass;
+    Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,15 @@ public class ActivityLogin extends AppCompatActivity implements IViewLogin {
 
         context=getBaseContext();
         intialzation();
+        mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        mToolbar.setTitle(getString(R.string.app_name));
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         showPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
