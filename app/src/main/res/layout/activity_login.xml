@@ -74,34 +74,50 @@
         app:layout_constraintTop_toBottomOf="@+id/email"
         />
 
-    <CheckBox
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Must be at least 6 charcters*"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/login_toolbar"
+        app:layout_constraintVertical_bias="0.606"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
         android:id="@+id/chk_box"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@id/password"
-        app:layout_constraintBottom_toTopOf="@+id/sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Show Password"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/sign_in"
+        app:layout_constraintStart_toStartOf="@id/password"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
     <Button
         android:id="@+id/sign_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="24dp"
-        android:text="Login"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/chk_box"
-        app:layout_constraintStart_toStartOf="@+id/chk_box"
-        app:layout_constraintTop_toBottomOf="@+id/chk_box"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/button"
         android:elevation="8dp"
+        android:text="Continue"
         android:textAllCaps="false"
-        android:textStyle="bold"
         android:textColor="#fefefe"
-        />
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chk_box" />
 
 </android.support.constraint.ConstraintLayout>
