@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,6 +57,7 @@ public class ProfileFragment extends Fragment {
     private StorageReference userProfileImageRef;
     private String link;
     public static  View view;
+    FloatingActionButton fab;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -70,6 +72,7 @@ public class ProfileFragment extends Fragment {
         userNameTv = view.findViewById(R.id.user_name_tv);
         profilePic=view.findViewById(R.id.profile_picture);
         logOut=view.findViewById(R.id.logOut);
+        fab=view.findViewById(R.id.profile_fab);
         getUserData();
 
         logOut.setOnClickListener(new View.OnClickListener() {
@@ -82,16 +85,23 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent=new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                Log.e("test","108");
+                startActivityForResult(galleryIntent,GALLERY_PICK);
+                Log.e("test","110");
+
+
+            }
+        });
+
     profilePic.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent galleryIntent=new Intent();
-            galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-            galleryIntent.setType("image/*");
-            Log.e("test","108");
-
-            startActivityForResult(galleryIntent,GALLERY_PICK);
-            Log.e("test","110");
 
 
         }

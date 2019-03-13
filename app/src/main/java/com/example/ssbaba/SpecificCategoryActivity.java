@@ -1,5 +1,6 @@
 package com.example.ssbaba;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -36,6 +37,8 @@ public class SpecificCategoryActivity extends AppCompatActivity {
     String userId,currentItemId;
     int i;
     Toolbar mToolbar;
+    private ProgressDialog loadingbar;
+    private categoryItem categoryItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +62,12 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                 finish();
             }
         });
+        loadingbar=new ProgressDialog(this);
+        loadingbar.setTitle("loading");
 
-
-
+        if(arrayList==null) {
+            loadingbar.show();
+        }
 
         arrayList = new ArrayList<>();
         i = getIntent().getIntExtra("i",0);
@@ -150,7 +156,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    categoryItem categoryItem = new categoryItem();
+                    categoryItem = new categoryItem();
                     categoryItem.setColor(snapshot.child("color").getValue().toString());
                     categoryItem.setDescription(snapshot.child("description").getValue().toString());
                     categoryItem.setImage(snapshot.child("image").getValue().toString());
@@ -162,7 +168,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     categoryItem.setType(snapshot.child("type").getValue().toString());
                     arrayList.add(categoryItem);
                     Log.e("",categoryItem.getColor());
-
+                    loadingbar.dismiss();
                     adapter.notifyDataSetChanged();
 
 
@@ -173,7 +179,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                loadingbar.dismiss();
             }
         });
     }
@@ -197,6 +203,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     arrayList.add(categoryItem);
                     Log.e("",categoryItem.getColor());
                     adapter.notifyDataSetChanged();
+                    loadingbar.dismiss();
 
 
                 }
@@ -206,6 +213,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                loadingbar.dismiss();
 
             }
         });
@@ -229,6 +237,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
                     categoryItem.setId(snapshot.child("id").getValue().toString());
                     arrayList.add(categoryItem);
                     Log.e("",categoryItem.getColor());
+                    loadingbar.dismiss();
 
                     adapter.notifyDataSetChanged();
 
@@ -240,6 +249,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                loadingbar.dismiss();
 
             }
         });
@@ -281,6 +291,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
                     arrayList.add(categoryItem);
                     Log.e("",categoryItem.getColor());
+                    loadingbar.dismiss();
 
                     adapter.notifyDataSetChanged();
 
@@ -292,6 +303,7 @@ public class SpecificCategoryActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                loadingbar.dismiss();
 
             }
         });

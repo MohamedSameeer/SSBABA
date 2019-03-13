@@ -1,5 +1,6 @@
 package com.example.ssbaba;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     View navigationHeader;
     private FirebaseUser user;
     private StorageReference userProfileImageRef;
+    private ProgressDialog loadingbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
 
         toggle.syncState();
+        loadingbar=new ProgressDialog(this);
         toolbarLogo = findViewById(R.id.logoXmarks);
         toolbarLogo.setVisibility(View.VISIBLE);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -230,7 +233,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == RESULT_OK) {
                 final Uri resultUri = result.getUri();
                 Log.e("test ", "170");
-
+                loadingbar.setTitle("uploading your profile picture");
+                loadingbar.setMessage("please wait...");
+                loadingbar.setCanceledOnTouchOutside(true);
+                loadingbar.show();
                 final StorageReference filePath = userProfileImageRef.child(mAuth.getCurrentUser().getUid() + ".jpg");
                 filePath.putFile(resultUri)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -256,11 +262,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 if (task.isSuccessful()) {
                                     //  Toast.makeText(getContext(),"your picture has been updated successfully",Toast.LENGTH_LONG).show();
                                     Log.e("test ", "191");
-
+                                    loadingbar.dismiss();
 
                                 } else {
                                     String errorMessage = task.getException().toString();
                                     Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                                    loadingbar.dismiss();
 
                                 }
 
@@ -274,7 +281,3 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 }
-
-
-
-
